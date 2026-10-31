@@ -704,3 +704,38 @@ html.lenis { scroll-behavior: auto; }
   .btn, .btn::before, .theme-btn, .theme-btn svg, .nav-links a::after, .foot-links a { transition: none; }
   .btn:hover { transform: none; }
 }
+
+/* ---------- Facts: glass cards over a lit field (bridges the hero into the page) ---------- */
+.facts-field { position: relative; isolation: isolate; padding-top: clamp(72px, 9vw, 128px); overflow: clip; }
+.facts-field::before { content: ''; position: absolute; inset: 0 0 auto; height: 160px; z-index: -1; background: linear-gradient(var(--bg), transparent); }
+.facts-orbs { position: absolute; inset: 0; z-index: -2; pointer-events: none; }
+.facts-orbs i { position: absolute; width: 34vw; max-width: 460px; aspect-ratio: 1; border-radius: 50%; filter: blur(64px); opacity: .55; animation: orb 18s ease-in-out infinite alternate; }
+.facts-orbs i:nth-child(1) { background: var(--c-blue); left: 2%; top: 22%; }
+.facts-orbs i:nth-child(2) { background: var(--c-teal); left: 30%; top: 40%; animation-delay: -6s; }
+.facts-orbs i:nth-child(3) { background: var(--c-purple); right: 18%; top: 18%; animation-delay: -11s; }
+.facts-orbs i:nth-child(4) { background: var(--c-yellow); right: 0; top: 46%; opacity: .45; animation-delay: -3s; }
+@keyframes orb { to { transform: translate3d(6vw, -4vw, 0) scale(1.15); } }
+.facts > .glass {
+  position: relative; border: 1px solid color-mix(in srgb, #fff 70%, transparent); border-radius: 18px; padding: 26px 24px 28px;
+  background: linear-gradient(150deg, color-mix(in srgb, var(--surface) 72%, transparent), color-mix(in srgb, var(--surface) 38%, transparent));
+  -webkit-backdrop-filter: blur(22px) saturate(170%); backdrop-filter: blur(22px) saturate(170%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 80%, transparent), 0 1px 2px rgba(16, 24, 40, .05), 0 18px 48px rgba(16, 24, 40, .10);
+  transition: translate .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s;
+}
+.facts > .glass::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; background: radial-gradient(120% 60% at 0% 0%, rgba(255, 255, 255, .45), transparent 60%); opacity: .7; }
+.facts > .glass:hover { translate: 0 -6px; box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 80%, transparent), 0 2px 4px rgba(16, 24, 40, .06), 0 28px 64px rgba(16, 24, 40, .16); }
+.facts > .glass span { color: var(--text); opacity: .74; }
+html[data-theme='dark'] .facts > .glass { border-color: rgba(255, 255, 255, .12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 18px 48px rgba(0, 0, 0, .5); }
+html[data-theme='dark'] .facts > .glass::after { background: radial-gradient(120% 60% at 0% 0%, rgba(255, 255, 255, .08), transparent 60%); }
+html[data-theme='dark'] .facts-orbs i { opacity: .38; }
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme='light']) .facts > .glass { border-color: rgba(255, 255, 255, .12); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .10), 0 18px 48px rgba(0, 0, 0, .5); }
+  html:not([data-theme='light']) .facts > .glass::after { background: radial-gradient(120% 60% at 0% 0%, rgba(255, 255, 255, .08), transparent 60%); }
+  html:not([data-theme='light']) .facts-orbs i { opacity: .38; }
+}
+@media (prefers-reduced-transparency: reduce) { .facts > .glass { background: var(--surface); -webkit-backdrop-filter: none; backdrop-filter: none; } }
+@media (prefers-reduced-motion: reduce) { .facts-orbs i { animation: none; } .facts > .glass { transition: none; } }
+@media (max-width: 900px) { .facts-orbs i { width: 70vw; filter: blur(48px); } }
+.hero { z-index: 1; } /* the pinned dock paints above the facts field while they overlap */
+.facts-field { padding-bottom: clamp(88px, 10vw, 140px); }
+.facts-field::after { content: ''; position: absolute; inset: auto 0 0; height: 55%; z-index: -1; background: linear-gradient(transparent, var(--bg)); pointer-events: none; }

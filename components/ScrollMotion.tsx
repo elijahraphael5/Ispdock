@@ -147,13 +147,21 @@ export function ScrollMotion() {
         if (lede.length) tl.from(lede, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
       });
 
-      // Facts count up to their figure
-      gsap.utils.toArray<HTMLElement>('.facts > div').forEach((fact, i) => {
+      // Facts: the glass cards rise out of the hero with the scroll itself (no pop), the orbs drift slower behind them,
+      // and each figure counts up once. No `filter` tween: it would switch off the cards' backdrop blur.
+      const field = document.querySelector<HTMLElement>('.facts-field');
+      if (field) {
+        gsap.fromTo('.facts > div', { y: 110, opacity: 0, scale: 0.94 }, {
+          y: 0, opacity: 1, scale: 1, ease: 'none', stagger: 0.12,
+          scrollTrigger: { trigger: field, start: 'top bottom', end: 'top 35%', scrub: 0.8 },
+        });
+        gsap.fromTo('.facts-orbs', { yPercent: 18 }, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: field, start: 'top bottom', end: 'bottom top', scrub: true } });
+      }
+      gsap.utils.toArray<HTMLElement>('.facts > div').forEach((fact) => {
         unreveal(fact);
         const strong = fact.querySelector('strong');
         const m = strong?.textContent?.match(/^(\D*)(\d+)(.*)$/);
-        const tl = gsap.timeline({ scrollTrigger: { trigger: fact, start: 'top 90%', toggleActions: 'play none none none' } });
-        tl.from(fact, { y: 24, opacity: 0, duration: 0.6, ease: 'power2.out', delay: i * 0.08 });
+        const tl = gsap.timeline({ scrollTrigger: { trigger: fact, start: 'top 80%', toggleActions: 'play none none none' } });
         if (strong && m && +m[2] > 0) {
           const o = { v: 0 };
           tl.to(o, { v: +m[2], duration: 1.1, ease: 'power3.out', onUpdate: () => { strong.textContent = m[1] + Math.round(o.v) + m[3]; } }, '<');

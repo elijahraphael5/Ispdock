@@ -7,9 +7,10 @@ const FACTS = [
 
 export function Facts() {
   return (
-    <section className="section-sm" aria-label="At a glance">
+    <section className="section-sm facts-field" aria-label="At a glance">
+      <div className="facts-orbs" aria-hidden="true"><i /><i /><i /><i /></div>
       <div className="wrap grid facts">
-        {FACTS.map(([n, t]) => <div className="reveal" key={t}><strong>{n}</strong><span>{t}</span></div>)}
+        {FACTS.map(([n, t]) => <div className="reveal glass" key={t}><strong>{n}</strong><span>{t}</span></div>)}
       </div>
     </section>
   );
