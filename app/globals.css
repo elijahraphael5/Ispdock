@@ -867,3 +867,44 @@ html[data-theme='dark'] .orbs i { opacity: .38; }
 .fd-stock p { display: flex; justify-content: space-between; margin: 8px 0 0; padding-top: 8px; border-top: 1px solid var(--line); font-size: 12px; }
 .fd-stock p b { font-variant-numeric: tabular-nums; }
 .fd-toast { top: 300px; }
+
+/* ---------- Glass in the site's box shape: square, top-right corner cut like the dock boxes ----------
+   A cut shape crops anything drawn outside it, so the shadow is a blurred layer behind the pane (on .fact / .plan),
+   and the edge light and plan outlines are rings clipped to the same cut (polygon evenodd: outer edge minus inner edge). */
+.glass {
+  --n: 16px; border-radius: 0; box-shadow: none;
+  clip-path: polygon(0 0, calc(100% - var(--n)) 0, 100% var(--n), 100% 100%, 0 100%);
+}
+.glass[data-hot] { box-shadow: none; }
+.glass > i { border-radius: 0; }
+.glass-rim, .plan-pane::after {
+  --w: 1px; position: absolute; inset: 0; pointer-events: none; padding: 0; -webkit-mask: none; mask: none;
+  clip-path: polygon(evenodd,
+    0 0, calc(100% - var(--n)) 0, 100% var(--n), 100% 100%, 0 100%, 0 0,
+    var(--w) var(--w), var(--w) calc(100% - var(--w)), calc(100% - var(--w)) calc(100% - var(--w)),
+    calc(100% - var(--w)) calc(var(--n) + var(--w) * .414), calc(100% - var(--n) - var(--w) * .414) var(--w), var(--w) var(--w));
+}
+/* the edge: a faint line all round, brighter where the pointer is */
+.glass-rim { --w: 1.2px; opacity: 1; background: radial-gradient(200px circle at var(--gx, 30%) var(--gy, 0%), rgba(255, 255, 255, var(--rim-hi, 0)), rgba(255, 255, 255, 0) 70%), var(--glass-line, rgba(255, 255, 255, .7)); }
+.glass[data-hot] .glass-rim { --rim-hi: 1; }
+html[data-theme='dark'] .glass { --glass-line: rgba(255, 255, 255, .16); }
+@media (prefers-color-scheme: dark) { html:not([data-theme='light']) .glass { --glass-line: rgba(255, 255, 255, .16); } }
+
+/* shadow behind the pane: grows when the pane lifts */
+.facts > .fact, .plan { position: relative; isolation: isolate; }
+.facts > .fact::before, .plan::before {
+  content: ''; position: absolute; inset: 18px 14px -8px; z-index: -1; pointer-events: none;
+  background: rgba(16, 24, 40, .16); filter: blur(22px); opacity: .7; transition: opacity .5s ease, transform .7s cubic-bezier(.34, 1.56, .64, 1);
+}
+.facts > .fact:has(> .glass[data-hot])::before, .plan:has(> .glass[data-hot])::before { opacity: 1; transform: translateY(10px) scale(1.03); }
+html[data-theme='dark'] .facts > .fact::before, html[data-theme='dark'] .plan::before { background: rgba(0, 0, 0, .6); }
+@media (prefers-color-scheme: dark) { html:not([data-theme='light']) .facts > .fact::before, html:not([data-theme='light']) .plan::before { background: rgba(0, 0, 0, .6); } }
+
+/* plans: Recommended / Fits-your-size outlines follow the cut corner too */
+.plan-pane::after { content: ''; z-index: 3; background: transparent; }
+.plan-pick .plan-pane, .plan.is-fit .plan-pane { outline: none; }
+.plan-pick .plan-pane::after { background: var(--accent); }
+.plans.has-fit .plan-pick:not(.is-fit) .plan-pane::after { background: transparent; }
+.plan.is-fit .plan-pane::after { --w: 2px; background: var(--accent); }
+.plan-tag { border-radius: 0; box-shadow: none; z-index: 4; }
+@media (prefers-contrast: more) { .glass { box-shadow: none; } .glass-rim { --w: 1.5px; background: var(--text); } }

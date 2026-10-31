@@ -57,11 +57,11 @@ export function Pricing() {
           <div className="orbs plans-orbs" aria-hidden="true"><i /><i /><i /></div>
           {CARDS.map((c) => (
             <article key={c.key} className={rv('plan' + (c.pick ? ' plan-pick' : '') + (lit === c.key ? ' is-fit' : ''))} data-plan={c.key} data-self>
+              {c.pick ? <span className="plan-tag">Recommended</span> : null}
               <div className="glass plan-pane">
                 <i className="glass-lens" aria-hidden="true" />
                 <i className="glass-sheen" aria-hidden="true" />
                 <i className="glass-rim" aria-hidden="true" />
-                {c.pick ? <span className="plan-tag">Recommended</span> : null}
                 <h3>{c.name}</h3>
                 <p className="plan-for">{c.for}</p>
                 <p className="price"><strong>{c.price}</strong><span>/month</span></p>
