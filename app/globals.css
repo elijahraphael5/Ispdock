@@ -710,20 +710,32 @@ html.lenis { scroll-behavior: auto; }
    fading in at the top and out at the bottom, so there is no edge between the two sections. */
 .flow { position: relative; isolation: isolate; overflow-x: clip; }
 /* One glow, not scattered spots: every colour fans out from a single point under the facts and is blurred into the
-   next, so they merge into one band of light that rises in a wide arc up into the hero and fades before the headline. */
+   next, so they merge into one band of light that rises in a wide arc up into the hero and fades before the headline.
+   Its colours keep changing: three layers, each the same band with the colours in a different order, fade into one
+   another. Each layer is drawn and blurred once; only their opacity moves, which the GPU does without repainting
+   (animating the gradient itself repainted a 70px blur every frame and stalled the page). */
 .flow-glow {
   position: absolute; left: 50%; bottom: 0; z-index: -1; pointer-events: none;
   width: max(1500px, 135%); height: min(1900px, 100%); transform: translateX(-50%) scale(var(--glow, 1)); transform-origin: 50% 100%;
-  background: conic-gradient(from 270deg at 50% 100%, #12A4AF 0deg, #2B50EC 34deg, #6D3AE0 72deg, #E04FA8 104deg, #FF6B4A 132deg, #FFB547 158deg, #FFD23F 180deg);
+  opacity: .5;
+}
+.flow-glow i {
+  position: absolute; inset: 0; will-change: opacity;
   /* arc upward from the source; and below the facts boxes it fades out, so the next section starts on plain white */
   -webkit-mask-image: radial-gradient(ellipse 50% 100% at 50% 100%, #000 0%, rgba(0, 0, 0, .75) 34%, rgba(0, 0, 0, .3) 62%, transparent 82%), linear-gradient(to top, transparent 0, #000 clamp(110px, 13vw, 200px));
           mask-image: radial-gradient(ellipse 50% 100% at 50% 100%, #000 0%, rgba(0, 0, 0, .75) 34%, rgba(0, 0, 0, .3) 62%, transparent 82%), linear-gradient(to top, transparent 0, #000 clamp(110px, 13vw, 200px));
   -webkit-mask-composite: source-in; mask-composite: intersect;
-  filter: blur(70px) saturate(1.1); opacity: .5;
+  filter: blur(70px) saturate(1.1);
 }
+.flow-glow i:nth-child(1) { background: conic-gradient(from 270deg at 50% 100%, #12A4AF 0deg, #2B50EC 34deg, #6D3AE0 72deg, #E04FA8 104deg, #FF6B4A 132deg, #FFB547 158deg, #FFD23F 180deg); }
+.flow-glow i:nth-child(2) { background: conic-gradient(from 270deg at 50% 100%, #E04FA8 0deg, #FF6B4A 34deg, #FFB547 72deg, #FFD23F 104deg, #12A4AF 132deg, #2B50EC 158deg, #6D3AE0 180deg); opacity: 0; animation: glow-swap 12s ease-in-out infinite; }
+.flow-glow i:nth-child(3) { background: conic-gradient(from 270deg at 50% 100%, #FFD23F 0deg, #12A4AF 34deg, #2B50EC 72deg, #6D3AE0 104deg, #E04FA8 132deg, #FF6B4A 158deg, #FFB547 180deg); opacity: 0; animation: glow-swap 12s ease-in-out -6s infinite; }
+/* each colourway takes over for a while, then hands back: the base, then layer 2, then layer 3, every few seconds */
+@keyframes glow-swap { 0%, 100% { opacity: 0; } 20%, 45% { opacity: 1; } 65% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .flow-glow i { animation: none !important; } }
 html[data-theme='dark'] .flow-glow { opacity: .42; }
 @media (prefers-color-scheme: dark) { html:not([data-theme='light']) .flow-glow { opacity: .42; } }
-@media (max-width: 900px) { .flow-glow { width: 260%; filter: blur(48px); } }
+@media (max-width: 900px) { .flow-glow { width: 260%; } .flow-glow i { filter: blur(48px); } }
 
 .facts { grid-auto-rows: 1fr; align-items: stretch; } /* equal panes, also when they wrap to two or one per row */
 .facts > .fact { border-top: 0; padding-top: 0; display: flex; perspective: 900px; }

@@ -24,7 +24,7 @@ export default function Home() {
       <main id="main">
         {/* one blended glow rising from below the facts up into the hero */}
         <div className="flow">
-          <div className="flow-glow" aria-hidden="true" />
+          <div className="flow-glow" aria-hidden="true"><i /><i /><i /></div>
           <Hero />
           <Facts />
         </div>
