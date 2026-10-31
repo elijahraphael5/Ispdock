@@ -22,9 +22,9 @@ export default function Home() {
       <a className="skip" href="#main">Skip to content</a>
       <Nav />
       <main id="main">
-        {/* one colour field behind the end of the hero and the facts, so the glow flows from one into the other */}
+        {/* one blended glow rising from below the facts up into the hero */}
         <div className="flow">
-          <div className="orbs flow-orbs" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
+          <div className="flow-glow" aria-hidden="true" />
           <Hero />
           <Facts />
         </div>

@@ -32,7 +32,7 @@ export const loopScene = (sc: HTMLElement, build: (i: number) => Tl) => {
   let i = 0, tl: Tl | null = null, on = false;
   const next = () => { tl = build(i++); tl.eventCallback('onComplete', next); if (!on) tl.pause(); };
   next();
-  const io = new IntersectionObserver((e) => { on = e[0].isIntersecting; if (on) tl?.play(); else tl?.pause(); }, { threshold: 0.3 });
+  const io = new IntersectionObserver((e) => { on = e[0].isIntersecting; if (on) tl?.play(); else tl?.pause(); }, { threshold: 0.05 });
   io.observe(sc);
   return () => { io.disconnect(); tl?.kill(); tl = null; };
 };

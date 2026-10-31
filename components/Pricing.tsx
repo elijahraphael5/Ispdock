@@ -54,7 +54,6 @@ export function Pricing() {
         </div>
 
         <div className="plans col-main has-fit">
-          <div className="orbs plans-orbs" aria-hidden="true"><i /><i /><i /></div>
           {CARDS.map((c) => (
             <article key={c.key} className={rv('plan' + (c.pick ? ' plan-pick' : '') + (lit === c.key ? ' is-fit' : ''))} data-plan={c.key} data-self>
               {c.pick ? <span className="plan-tag">Recommended</span> : null}

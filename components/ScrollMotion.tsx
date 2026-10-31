@@ -167,7 +167,8 @@ export function ScrollMotion() {
         const cards = gsap.utils.toArray<HTMLElement>('.facts > .fact');
         const rise = gsap.timeline({ scrollTrigger: { trigger: field, start: 'top 95%', end: 'top 40%', scrub: 0.8 } });
         cards.forEach((c, i) => rise.fromTo(c, { y: 90, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', duration: 1 }, i * 0.15));
-        gsap.fromTo('.flow-orbs', { '--py': '120px' }, { '--py': '-120px', ease: 'none', scrollTrigger: { trigger: '.flow-orbs', start: 'top bottom', end: 'bottom top', scrub: true } });
+        // The glow swells a little as the facts come up, like light rising behind them.
+        gsap.fromTo('.flow-glow', { '--glow': 0.88 }, { '--glow': 1.06, ease: 'none', scrollTrigger: { trigger: '.flow', start: 'top top', end: 'bottom bottom', scrub: true } });
       }
       gsap.utils.toArray<HTMLElement>('.facts > .fact').forEach((fact) => {
         unreveal(fact);

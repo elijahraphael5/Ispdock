@@ -15,20 +15,18 @@ const ROWS = [
 function setup(sc: HTMLDivElement) {
   const rows = $$(sc, '.su-row'), sel = $(sc, '.su-sel'), open = $(sc, '.su-count'), thread = $(sc, '.su-thread');
   const ask = $(sc, '.su-ask'), typing = $(sc, '.su-typing'), dots = $$(sc, '.su-typing i'), reply = $(sc, '.su-reply');
-  const state = $(sc, '.su-state'), toast = $(sc, '.su-toast'), head = $(sc, '.su-head'), inbox = $(sc, '.su-inbox');
+  const state = $(sc, '.su-state'), toast = $(sc, '.su-toast');
   return () => {
     gsap.set([thread, toast, sel], { autoAlpha: 0 });
     gsap.set([ask, reply], { autoAlpha: 0, y: 10 });
     gsap.set(typing, { autoAlpha: 0 });
     state.textContent = 'Open'; state.classList.remove('done');
-    open.textContent = '0';
-    const c1 = count(open, 0, 3, String), c2 = count(open, 3, 2, String);
-    const tl = gsap.timeline({ delay: 0.3 });
-    tl.from(inbox, { y: 18, opacity: 0, duration: 0.5, ease: 'power3.out' })
-      .from(head, { y: 10, opacity: 0, duration: 0.4, ease: 'power3.out' }, 0.1)
-      .from(rows, { x: -30, opacity: 0, duration: 0.5, stagger: 0.25, ease: 'expo.out' }, 0.2)
-      .to(c1.target, { duration: 0.9, ease: 'power2.out', ...c1.vars }, 0.2)
-      .to(sel, { autoAlpha: 1, duration: 0.3 }, '+=0.3')
+    open.textContent = '3';
+    gsap.set(rows[0], { opacity: 1 });
+    const c2 = count(open, 3, 2, String);
+    const tl = gsap.timeline({ delay: 0.1 });
+    // The tablet and its inbox are on screen from the first frame; the first chat opens straight away.
+    tl.to(sel, { autoAlpha: 1, duration: 0.3 }, 0.2)
       .to(rows[0], { x: 6, duration: 0.15, yoyo: true, repeat: 1 }, '<')
       .to(thread, { autoAlpha: 1, x: 0, duration: 0.6, ease: 'expo.out' }, '+=0.1')
       .to(ask, { autoAlpha: 1, y: 0, duration: 0.4, ease: 'power3.out' })
@@ -42,8 +40,8 @@ function setup(sc: HTMLDivElement) {
       .to(rows[0], { opacity: 0.45, duration: 0.4 }, '<')
       .to(toast, { autoAlpha: 1, y: 0, duration: 0.55, ease: 'expo.out' }, '+=0.2')
       .to({}, { duration: 2.4 })
-      .to([inbox, sel, thread, toast], { opacity: 0, duration: 0.45 })
-      .set([inbox, head, ...rows], { opacity: 1, x: 0, y: 0 });
+      .to([sel, thread, toast], { autoAlpha: 0, duration: 0.45 })
+      .to(rows[0], { opacity: 1, duration: 0.45 }, '<');
     return tl;
   };
 }
