@@ -22,8 +22,12 @@ export default function Home() {
       <a className="skip" href="#main">Skip to content</a>
       <Nav />
       <main id="main">
-        <Hero />
-        <Facts />
+        {/* one colour field behind the end of the hero and the facts, so the glow flows from one into the other */}
+        <div className="flow">
+          <div className="orbs flow-orbs" aria-hidden="true"><i /><i /><i /><i /><i /><i /></div>
+          <Hero />
+          <Facts />
+        </div>
         <Manifesto />
         <Product />
         <Spotlights />

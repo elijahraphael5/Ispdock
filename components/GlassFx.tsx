@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { prefersStill } from '@/lib/site';
 
 // Liquid-glass response for .glass panes: the light (sheen + rim) follows the pointer, the pane leans a little toward it
-// and lifts on a spring; pressing squishes it and blooms light from the touch point. Decorative only: nothing to focus.
+// and lifts on a spring; pressing squishes it and blooms light from the touch point. State lives in data attributes: React owns className on the pricing cards.
 export function GlassFx() {
   useEffect(() => {
     const panes = Array.from(document.querySelectorAll<HTMLElement>('.glass'));
@@ -28,14 +28,18 @@ export function GlassFx() {
           }
         });
       };
-      const enter = (e: PointerEvent) => { aim(e); pane.classList.add('is-hot'); };
+      const enter = (e: PointerEvent) => { aim(e); pane.dataset.hot = ''; };
       const leave = () => {
         cancelAnimationFrame(frame);
-        pane.classList.remove('is-hot', 'is-press');
+        delete pane.dataset.hot; delete pane.dataset.press;
         pane.style.removeProperty('--rx'); pane.style.removeProperty('--ry');
       };
-      const down = (e: PointerEvent) => { aim(e); pane.classList.add('is-hot', 'is-press'); };
-      const up = (e: PointerEvent) => { pane.classList.remove('is-press'); if (e.pointerType !== 'mouse') leave(); };
+      // a press on a button or link inside the pane belongs to that control, not to the pane
+      const down = (e: PointerEvent) => {
+        if ((e.target as Element).closest('a, button, input, label, select, textarea')) return;
+        aim(e); pane.dataset.hot = ''; pane.dataset.press = '';
+      };
+      const up = (e: PointerEvent) => { delete pane.dataset.press; if (e.pointerType !== 'mouse') leave(); };
       pane.addEventListener('pointerenter', enter);
       pane.addEventListener('pointermove', aim);
       pane.addEventListener('pointerleave', leave);

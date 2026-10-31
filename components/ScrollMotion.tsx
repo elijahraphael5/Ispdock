@@ -152,14 +152,14 @@ export function ScrollMotion() {
         if (lede.length) tl.from(lede, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
       });
 
-      // Facts: the glass cards rise in order as the section arrives (scroll-linked, no pop), the orbs drift slower behind them.
+      // Facts: the glass cards rise in order as the section arrives (scroll-linked, no pop), the colour field drifts slower behind them.
       // The scroll moves the outer .fact; the pointer effects live on the inner .glass, so the two never fight over transform.
       const field = document.querySelector<HTMLElement>('.facts-field');
       if (field) {
         const cards = gsap.utils.toArray<HTMLElement>('.facts > .fact');
         const rise = gsap.timeline({ scrollTrigger: { trigger: field, start: 'top 95%', end: 'top 40%', scrub: 0.8 } });
         cards.forEach((c, i) => rise.fromTo(c, { y: 90, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', duration: 1 }, i * 0.15));
-        gsap.fromTo('.facts-orbs', { yPercent: 18 }, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: field, start: 'top bottom', end: 'bottom top', scrub: true } });
+        gsap.fromTo('.flow-orbs', { '--py': '120px' }, { '--py': '-120px', ease: 'none', scrollTrigger: { trigger: '.flow-orbs', start: 'top bottom', end: 'bottom top', scrub: true } });
       }
       gsap.utils.toArray<HTMLElement>('.facts > .fact').forEach((fact) => {
         unreveal(fact);
