@@ -142,8 +142,9 @@ export function ScrollMotion() {
         unreveal(head);
         const tl = gsap.timeline({ scrollTrigger: { trigger: head, start: 'top 85%', toggleActions: 'play none none none' } });
         tl.from(head.querySelectorAll('.label'), { x: -16, opacity: 0, duration: 0.5, ease: 'power2.out' })
-          .from(head.querySelectorAll('h2 .wm > span'), { yPercent: 110, duration: 0.8, ease: 'expo.out', stagger: 0.04 }, 0.05)
-          .from(head.querySelectorAll('.lede'), { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
+          .from(head.querySelectorAll('h2 .wm > span'), { yPercent: 110, duration: 0.8, ease: 'expo.out', stagger: 0.04 }, 0.05);
+        const lede = head.querySelectorAll('.lede'); // the FAQ heading has none
+        if (lede.length) tl.from(lede, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
       });
 
       // Facts count up to their figure
