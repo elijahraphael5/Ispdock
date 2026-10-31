@@ -1,5 +1,6 @@
 import { CONTACT_EMAIL } from '@/lib/site';
 import { Mark } from './Mark';
+import { Wordmark } from './Wordmark';
 import { Year } from './Year';
 
 export function Footer() {
@@ -31,7 +32,7 @@ export function Footer() {
         <p className="fine rail foot-base">© <Year /> ISPDock. Prices in naira, before VAT.</p>
         <p className="fine col-main foot-base foot-top"><a href="#top">Back to top ↑</a></p>
       </div>
-      <div className="wordmark" aria-hidden="true">ISPDock</div>
+      <Wordmark />
     </footer>
   );
 }

@@ -10,7 +10,9 @@ import { Nav } from '@/components/Nav';
 import { Network } from '@/components/Network';
 import { Pricing } from '@/components/Pricing';
 import { Product } from '@/components/Product';
+import { Magnetic } from '@/components/Magnetic';
 import { ScrollMotion } from '@/components/ScrollMotion';
+import { SmoothScroll } from '@/components/SmoothScroll';
 import { Spotlights } from '@/components/Spotlights';
 
 export default function Home() {
@@ -32,7 +34,9 @@ export default function Home() {
         <FinalCta />
       </main>
       <Footer />
+      <SmoothScroll />
       <ScrollMotion />
+      <Magnetic />
     </>
   );
 }

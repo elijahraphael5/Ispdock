@@ -133,7 +133,7 @@ export function ScrollMotion() {
         list.forEach((box, i) => {
           const next = list[i + 1];
           if (!next) return;
-          gsap.to(box, { scale: 0.93, '--dim': 0.28, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (80 + (i + 1) * 10) + 'px', scrub: true } });
+          gsap.to(box, { scale: 0.93, '--dim': 0.28, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (80 + (i + 1) * 10) + 'px', scrub: 0.5 } });
         });
       });
 
@@ -194,14 +194,14 @@ export function ScrollMotion() {
           const next = spots[i + 1];
           if (!next) return;
           gsap.to(spot, { scale: 0.94, '--dim': 0.3, ease: 'none',
-            scrollTrigger: { trigger: next, start: 'top bottom', end: () => 'top ' + (parseFloat(next.style.getPropertyValue('--stick')) || 80) + 'px', scrub: true, invalidateOnRefresh: true } });
+            scrollTrigger: { trigger: next, start: 'top bottom', end: () => 'top ' + (parseFloat(next.style.getPropertyValue('--stick')) || 80) + 'px', scrub: 0.5, invalidateOnRefresh: true } });
         });
       });
       mm.add('(min-width: 1101px) and (min-height: 760px)', () => {
         spots.forEach((spot, i) => {
           const next = spots[i + 1];
           if (!next) return;
-          gsap.to(spot, { scale: 0.94, '--dim': 0.3, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (88 + (i + 1) * 22) + 'px', scrub: true } });
+          gsap.to(spot, { scale: 0.94, '--dim': 0.3, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (88 + (i + 1) * 22) + 'px', scrub: 0.5 } });
         });
       });
     });
