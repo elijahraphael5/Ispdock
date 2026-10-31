@@ -160,8 +160,8 @@ a[data-contact] { cursor: pointer; }
 .typed { color: var(--accent); }
 .caret { display: inline-block; width: .06em; height: .8em; margin-left: .05em; vertical-align: -0.02em; background: var(--accent); animation: blink 1.05s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
-.hero-meta { grid-row: 3; list-style: none; margin: 40px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; font: 500 0.75rem/1.4 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.hero-copy { grid-column: 4 / 11; grid-row: 3; margin-top: 40px; padding-top: 18px; border-top: 1px solid var(--line); }
+.hero-copy { grid-column: 1 / -1; grid-row: 3; margin-top: 40px; }
+.hero-title > span[aria-hidden] { font-weight: 300; letter-spacing: -0.045em; }
 
 /* Product shot: a working-looking dashboard (same structure as the real admin) */
 .device { margin: clamp(56px, 7vw, 88px) 0 0; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 40px 90px rgba(16, 24, 40, .16), 0 2px 6px rgba(16, 24, 40, .06); overflow: hidden; will-change: transform; }
@@ -251,14 +251,6 @@ a[data-contact] { cursor: pointer; }
 .tr-up { fill: none; stroke: var(--c-teal); stroke-width: 2; vector-effect: non-scaling-stroke; }
 .tr-fill { fill: color-mix(in srgb, var(--accent) 12%, transparent); }
 
-/* Hero shapes: square, hatched and outlined blocks drifting in the grid (GSAP moves them) */
-.shapes { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
-.sh { position: absolute; display: block; }
-.sh-1 { top: 96px; right: 9%; width: 120px; height: 120px; border: 1px solid var(--line); background: var(--bg); }
-.sh-2 { top: 168px; right: 15%; width: 64px; height: 64px; background: var(--accent); }
-.sh-3 { top: 320px; right: 4%; width: 180px; height: 72px; background: repeating-linear-gradient(-45deg, var(--line) 0 1px, transparent 1px 9px); border: 1px solid var(--line); }
-.sh-4 { top: 60px; right: 30%; width: 22px; height: 22px; background: linear-gradient(var(--text), var(--text)) center / 100% 2px no-repeat, linear-gradient(var(--text), var(--text)) center / 2px 100% no-repeat; }
-.sh-5 { top: 250px; right: 26%; width: 36px; height: 36px; border: 1px solid var(--accent); transform: rotate(45deg); }
 
 /* Word masks for heading reveals (added by site.js only when GSAP runs) */
 .wm { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .14em; margin-bottom: -.14em; }
@@ -413,7 +405,7 @@ a[data-contact] { cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .pt-online i { animation: none; } .ps-wire-flow { animation: none; } }
 
 /* Network (dark): cells in thirds of columns 4–12, on a faint line grid */
-.section-dark { position: relative; overflow: hidden; background: var(--dark-bg); color: var(--dark-text); padding-top: clamp(140px, 15vw, 200px); clip-path: polygon(0% 6%, 100% 0%, 100% 100%, 0% 100%); }
+.section-dark { position: relative; overflow: hidden; background: var(--dark-bg); color: var(--dark-text); }
 .section-dark::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: linear-gradient(#000, transparent 70%); mask-image: linear-gradient(#000, transparent 70%); pointer-events: none; }
 .section-dark .wrap { position: relative; }
 .section-dark .head { border-top-color: var(--dark-line); }
@@ -542,7 +534,6 @@ a[data-contact] { cursor: pointer; }
   .rail, .head .label, .spot .label, .grid > .label.rail, .final .grid > .label { padding-top: 0; margin-bottom: 16px; }
   .head { row-gap: 0; }
   .head .lede { margin-top: 16px; }
-  .hero-meta { display: none; }
   .hero-copy { margin-top: 28px; }
   .facts { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; }
   .facts > div { grid-column: auto; }
@@ -573,8 +564,6 @@ a[data-contact] { cursor: pointer; }
   .ds-top { margin: 0 -12px 14px; padding: 0 12px; }
   .ds-kpis, .ds-row, .ds-row-b { grid-template-columns: 1fr 1fr; }
   .ds-row .tile-chart, .ds-row-b .tile { grid-column: 1 / -1; }
-  .shapes { display: none; }
-  .section-dark { clip-path: polygon(0% 3%, 100% 0%, 100% 100%, 0% 100%); padding-top: 120px; }
 }
 @media (max-width: 480px) {
   .ds-kpis { grid-template-columns: 1fr; }

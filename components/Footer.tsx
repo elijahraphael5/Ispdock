@@ -28,13 +28,6 @@ export function Footer() {
             <li><a href={'mailto:' + CONTACT_EMAIL}>{CONTACT_EMAIL}</a></li>
           </ul>
         </div>
-        <div className="foot-col">
-          <p className="label">Family</p>
-          <ul className="foot-links">
-            <li><a href="https://lazasend.com">LazaSend — email sending</a></li>
-            <li><a href="https://lasamailer.com">LasaMailer — mail</a></li>
-          </ul>
-        </div>
         <p className="fine rail foot-base">© <Year /> ISPDock. Prices in naira, before VAT.</p>
         <p className="fine col-main foot-base foot-top"><a href="#top">Back to top ↑</a></p>
       </div>

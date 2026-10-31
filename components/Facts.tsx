@@ -1,8 +1,8 @@
 const FACTS = [
-  ['₦150', 'per customer a month, our standard rate'],
-  ['7 ways', 'to get paid: card, transfer, USSD, Monnify, OPay, bank account, cash desk'],
-  ['2 addresses', 'yours: admin. for staff and my. for customers'],
-  ['0', 'contracts and minimums'],
+  ['12 tools', 'to run the whole ISP, from billing to stock, on every plan'],
+  ['30 s', 'between router checks, with an alert the moment one stops answering'],
+  ['1 RADIUS', 'for PPPoE, static IP and hotspot logins on your MikroTik routers'],
+  ['2 weeks', 'to move you over, usually: customers, routers, addresses and staff'],
 ];
 
 export function Facts() {

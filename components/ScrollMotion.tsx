@@ -137,13 +137,6 @@ export function ScrollMotion() {
         });
       });
 
-      // Hero shapes drift at different speeds
-      gsap.utils.toArray<HTMLElement>('.sh').forEach((sh, i) => {
-        const depth = [90, 180, 60, 240, 140][i] || 100;
-        gsap.to(sh, { y: -depth, rotation: i % 2 ? 90 : -45, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
-      });
-      gsap.from('.sh', { scale: 0, opacity: 0, duration: 0.9, ease: 'expo.out', stagger: 0.08, delay: 0.3 });
-
       // Section headings rise word by word out of a mask (Words renders the masks)
       gsap.utils.toArray<HTMLElement>('.head').forEach((head) => {
         unreveal(head);
@@ -174,12 +167,9 @@ export function ScrollMotion() {
         gsap.to(row, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', delay: (i % 3) * 0.07, scrollTrigger: { trigger: row, start: 'top 92%', toggleActions: 'play none none none' } });
       });
 
-      // Network section: the angled edge flattens as it scrolls in, the cards follow
+      // Network section: the cards follow each other in
       const dark = document.querySelector<HTMLElement>('.section-dark');
       if (dark) {
-        const endClip = getComputedStyle(dark).clipPath;
-        gsap.fromTo(dark, { clipPath: 'polygon(0% 20%, 100% 0%, 100% 100%, 0% 100%)' },
-          { clipPath: endClip, ease: 'none', scrollTrigger: { trigger: dark, start: 'top bottom', end: 'top 30%', scrub: true } });
         const cards = gsap.utils.toArray<HTMLElement>('.net-card');
         cards.forEach(unreveal);
         gsap.from(cards, { y: 40, opacity: 0, duration: 0.7, ease: 'power3.out', stagger: 0.08, scrollTrigger: { trigger: '.net', start: 'top 80%', toggleActions: 'play none none none' } });

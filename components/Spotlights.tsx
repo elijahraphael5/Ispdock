@@ -3,9 +3,9 @@ import { PayScene } from './scenes/PayScene';
 import { PortalScene } from './scenes/PortalScene';
 
 const SPOTS = [
-  { cls: '', label: 'Payments', title: 'Get paid the way your customers already pay.',
-    lede: 'Each customer can get their own bank account number. Money sent to it pays their oldest bill first, and the rest waits in their wallet. No screenshots, no "I have paid" calls.',
-    ticks: ['Your own Paystack, Monnify and OPay accounts. The money goes straight to you.', 'A payment is only marked paid after the gateway confirms it.', 'Cash and POS go through a cash desk where a second person approves.'],
+  { cls: '', label: 'Billing', title: 'Billing that runs itself.',
+    lede: 'Invoices go out on each renewal date, payments land on the right bill and receipts are emailed. When a bill is overdue the login is suspended, and it comes back the moment the customer pays.',
+    ticks: ['Monthly invoices, renewals and receipts, numbered and in your name.', 'A bill is marked paid only after the payment is confirmed.', 'Suspend and reconnect through RADIUS, with no one on your team lifting a finger.'],
     Scene: PayScene },
   { cls: ' spot-green', label: 'Customer portal', title: 'A portal your customers actually understand.',
     lede: 'No IP addresses, no jargon. Days left on their plan, what they owe, how much data they used and whether they are online. In real figures, in plain words.',
