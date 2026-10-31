@@ -8,7 +8,6 @@ const FACTS = [
 export function Facts() {
   return (
     <section className="section-sm facts-field" aria-label="At a glance">
-      <div className="facts-orbs" aria-hidden="true"><i /><i /><i /><i /></div>
       <div className="wrap grid facts">
         {FACTS.map(([n, t]) => (
           <div className="fact reveal" key={t}>
