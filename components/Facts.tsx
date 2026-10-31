@@ -10,7 +10,16 @@ export function Facts() {
     <section className="section-sm facts-field" aria-label="At a glance">
       <div className="facts-orbs" aria-hidden="true"><i /><i /><i /><i /></div>
       <div className="wrap grid facts">
-        {FACTS.map(([n, t]) => <div className="reveal glass" key={t}><strong>{n}</strong><span>{t}</span></div>)}
+        {FACTS.map(([n, t]) => (
+          <div className="fact reveal" key={t}>
+            <div className="glass">
+              <i className="glass-lens" aria-hidden="true" />
+              <i className="glass-sheen" aria-hidden="true" />
+              <i className="glass-rim" aria-hidden="true" />
+              <strong>{n}</strong><span>{t}</span>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

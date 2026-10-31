@@ -71,9 +71,14 @@ export function ScrollMotion() {
             const x0 = (W - w * SCALE) / 2, y0 = TOP, x1 = x0 + w * SCALE;
             // the dock keeps only the shrunk height; the full-size dashboard overflows into the pin's scroll space at first
             dock.style.height = (H * SCALE + TOP * 2) + 'px';
+            // the pinned area fills the screen, so the next section can't slide up under the dashboard while it holds still
+            (dock.parentElement as HTMLElement).style.minHeight = (window.innerHeight - 84) + 'px';
             const bw = Math.min(260, x0 - GAP);
             const sides: Record<string, HTMLElement[]> = { left: [], right: [] };
-            boxes.forEach((b) => { b.style.width = bw + 'px'; sides[b.dataset.side!].push(b); });
+            boxes.forEach((b) => { b.style.width = bw + 'px'; b.style.height = ''; sides[b.dataset.side!].push(b); });
+            // every box the height of the tallest one
+            const tallest = Math.max(...boxes.map((b) => b.offsetHeight));
+            boxes.forEach((b) => { b.style.height = tallest + 'px'; });
             svg.setAttribute('width', String(W)); svg.setAttribute('height', String(H));
             svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
             svg.textContent = '';
@@ -123,7 +128,7 @@ export function ScrollMotion() {
             }, { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, immediateRender: true }, 0.9)
             .fromTo(svg, { clipPath: 'inset(0 50% 0 50%)', opacity: 0 }, { clipPath: 'inset(0 0% 0 0%)', opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.6)
             .to({}, { duration: 0.4 });
-          return () => { dock.classList.remove('is-split'); dock.style.height = ''; svg.textContent = ''; boxes.forEach((b) => { b.style.cssText = ''; }); };
+          return () => { dock.classList.remove('is-split'); dock.style.height = ''; (dock.parentElement as HTMLElement).style.minHeight = ''; svg.textContent = ''; boxes.forEach((b) => { b.style.cssText = ''; }); };
         });
       }
 
@@ -147,17 +152,16 @@ export function ScrollMotion() {
         if (lede.length) tl.from(lede, { y: 16, opacity: 0, duration: 0.6, ease: 'power2.out' }, 0.3);
       });
 
-      // Facts: the glass cards rise out of the hero with the scroll itself (no pop), the orbs drift slower behind them,
-      // and each figure counts up once. No `filter` tween: it would switch off the cards' backdrop blur.
+      // Facts: the glass cards rise in order as the section arrives (scroll-linked, no pop), the orbs drift slower behind them.
+      // The scroll moves the outer .fact; the pointer effects live on the inner .glass, so the two never fight over transform.
       const field = document.querySelector<HTMLElement>('.facts-field');
       if (field) {
-        gsap.fromTo('.facts > div', { y: 110, opacity: 0, scale: 0.94 }, {
-          y: 0, opacity: 1, scale: 1, ease: 'none', stagger: 0.12,
-          scrollTrigger: { trigger: field, start: 'top bottom', end: 'top 35%', scrub: 0.8 },
-        });
+        const cards = gsap.utils.toArray<HTMLElement>('.facts > .fact');
+        const rise = gsap.timeline({ scrollTrigger: { trigger: field, start: 'top 95%', end: 'top 40%', scrub: 0.8 } });
+        cards.forEach((c, i) => rise.fromTo(c, { y: 90, opacity: 0 }, { y: 0, opacity: 1, ease: 'power2.out', duration: 1 }, i * 0.15));
         gsap.fromTo('.facts-orbs', { yPercent: 18 }, { yPercent: -18, ease: 'none', scrollTrigger: { trigger: field, start: 'top bottom', end: 'bottom top', scrub: true } });
       }
-      gsap.utils.toArray<HTMLElement>('.facts > div').forEach((fact) => {
+      gsap.utils.toArray<HTMLElement>('.facts > .fact').forEach((fact) => {
         unreveal(fact);
         const strong = fact.querySelector('strong');
         const m = strong?.textContent?.match(/^(\D*)(\d+)(.*)$/);
