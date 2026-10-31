@@ -67,6 +67,8 @@ export function BrandScene() {
         </div>
         <i className="br-wipe"></i>
       </div>
+      <i className="lt-cam"></i>
+      <i className="lt-base"></i>
       <div className="br-mail"><div className="br-mail-top"><i className="br-logo"></i><b className="br-name">Nova Fibre</b></div><p>Your invoice for November is ready.</p><span className="br-mail-btn">Pay now</span></div>
       <div className="br-chips">{BRANDS.map((b, k) => <i key={b.name} className={k === 0 ? 'on' : undefined} style={{ ['--c' as string]: b.b }}></i>)}</div>
     </div></div>
