@@ -54,24 +54,18 @@ export function Pricing() {
         </div>
 
         <div className="plans col-main has-fit">
-          <div className="orbs plans-orbs" aria-hidden="true"><i /><i /><i /></div>
           {CARDS.map((c) => (
             <article key={c.key} className={rv('plan' + (c.pick ? ' plan-pick' : '') + (lit === c.key ? ' is-fit' : ''))} data-plan={c.key} data-self>
-              <div className="glass plan-pane">
-                <i className="glass-lens" aria-hidden="true" />
-                <i className="glass-sheen" aria-hidden="true" />
-                <i className="glass-rim" aria-hidden="true" />
-                {c.pick ? <span className="plan-tag">Recommended</span> : null}
-                <h3>{c.name}</h3>
-                <p className="plan-for">{c.for}</p>
-                <p className="price"><strong>{c.price}</strong><span>/month</span></p>
-                <span className="fit">Fits your size</span>
-                <ul className="ticks">
-                  {c.items.map((t) => <li key={t}>{t}</li>)}
-                  {c.no ? <li className="no">{c.no}</li> : null}
-                </ul>
-                <ContactLink className={'btn btn-block ' + (c.pick ? 'btn-primary' : 'btn-ghost')}>Start with {c.name}</ContactLink>
-              </div>
+              {c.pick ? <span className="plan-tag">Recommended</span> : null}
+              <h3>{c.name}</h3>
+              <p className="plan-for">{c.for}</p>
+              <p className="price"><strong>{c.price}</strong><span>/month</span></p>
+              <span className="fit">Fits your size</span>
+              <ul className="ticks">
+                {c.items.map((t) => <li key={t}>{t}</li>)}
+                {c.no ? <li className="no">{c.no}</li> : null}
+              </ul>
+              <ContactLink className={'btn btn-block ' + (c.pick ? 'btn-primary' : 'btn-ghost')}>Start with {c.name}</ContactLink>
             </article>
           ))}
         </div>
