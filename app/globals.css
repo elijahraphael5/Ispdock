@@ -620,6 +620,7 @@ a[data-contact] { cursor: pointer; }
 /* Dock: the dashboard's menus as coloured boxes. Default (phones, reduced motion, no script): a plain grid under the dashboard.
    .is-split (desktop with GSAP): the dashboard shrinks in place, its parts break away into these boxes on either side,
    and a dashed line runs in a loop from the dashboard to each box. Positions are set by site.js. */
+.dock-pin { display: flow-root; } /* the dashboard's top margin stays inside whether pinned (fixed) or not, so nothing jumps when the pin lets go */
 .dock { position: relative; }
 .dock .device { position: relative; z-index: 1; }
 .dock-boxes { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap); }

@@ -81,10 +81,10 @@ export function ScrollMotion() {
             dock.style.height = (H * SCALE + TOP * 2) + 'px';
             // the pinned area fills the screen, so the next section can't slide up under the dashboard while it holds still
             (dock.parentElement as HTMLElement).style.minHeight = (window.innerHeight - 84) + 'px';
-            // ...but once the dashboard has shrunk, the bottom of that screen-tall area is empty: pull the facts up by
-            // exactly that much so they follow the dock closely (they only reach it after the shrink is done)
-            const field = document.querySelector<HTMLElement>('.facts-field');
-            if (field) field.style.marginTop = -Math.max(0, window.innerHeight - 84 - (H * SCALE + TOP * 2)) + 'px';
+            // and it paints above whatever scrolls up toward it
+            (dock.parentElement as HTMLElement).style.position = 'relative';
+            (dock.parentElement as HTMLElement).style.zIndex = '2';
+            let bottom = H * SCALE + TOP * 2;
             const bw = Math.min(260, x0 - GAP);
             const sides: Record<string, HTMLElement[]> = { left: [], right: [] };
             boxes.forEach((b) => { b.style.width = bw + 'px'; b.style.height = ''; sides[b.dataset.side!].push(b); });
@@ -122,7 +122,14 @@ export function ScrollMotion() {
                 });
                 y += bh + gap;
               });
+              bottom = Math.max(bottom, y - gap + TOP);
             });
+            // once the dashboard has shrunk, the bottom of that screen-tall area is empty: pull the facts up by that
+            // much, measured to the lowest box (not just the dashboard), so they stop just below it and never reach it
+            const field = document.querySelector<HTMLElement>('.facts-field');
+            // the dashboard's own top margin collapses through the dock and pushes everything down
+            const above = Math.max(parseFloat(getComputedStyle(device).marginTop) || 0, parseFloat(getComputedStyle(dock).marginTop) || 0);
+            if (field) field.style.marginTop = -Math.max(0, window.innerHeight - 84 - above - bottom) + 'px';
           };
           layout();
           const g = (b: HTMLElement) => geo.get(b)!;
@@ -140,7 +147,7 @@ export function ScrollMotion() {
             }, { x: 0, y: 0, scaleX: 1, scaleY: 1, opacity: 1, duration: 1, ease: 'power3.out', stagger: 0.1, immediateRender: true }, 0.9)
             .fromTo(svg, { clipPath: 'inset(0 50% 0 50%)', opacity: 0 }, { clipPath: 'inset(0 0% 0 0%)', opacity: 1, duration: 0.8, ease: 'power2.out' }, 1.6)
             .to({}, { duration: 0.4 });
-          return () => { dock.classList.remove('is-split'); dock.style.height = ''; const field = document.querySelector<HTMLElement>('.facts-field'); if (field) field.style.marginTop = ''; (dock.parentElement as HTMLElement).style.minHeight = ''; svg.textContent = ''; boxes.forEach((b) => { b.style.cssText = ''; }); };
+          return () => { dock.classList.remove('is-split'); dock.style.height = ''; const field = document.querySelector<HTMLElement>('.facts-field'); if (field) field.style.marginTop = ''; (dock.parentElement as HTMLElement).style.minHeight = ''; (dock.parentElement as HTMLElement).style.position = ''; (dock.parentElement as HTMLElement).style.zIndex = ''; svg.textContent = ''; boxes.forEach((b) => { b.style.cssText = ''; }); };
         });
       }
 
