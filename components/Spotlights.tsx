@@ -1,6 +1,9 @@
 import { BrandScene } from './scenes/BrandScene';
+import { FieldScene } from './scenes/FieldScene';
+import { NetworkScene } from './scenes/NetworkScene';
 import { PayScene } from './scenes/PayScene';
 import { PortalScene } from './scenes/PortalScene';
+import { SupportScene } from './scenes/SupportScene';
 
 const SPOTS = [
   { cls: '', label: 'Billing', title: 'Billing that runs itself.',
@@ -15,9 +18,21 @@ const SPOTS = [
     lede: 'Staff sign in at admin.yourisp.com and customers at my.yourisp.com. Your logo and colours run through the dashboard, the portal, every email and every invoice.',
     ticks: ['Five layouts and five dashboard designs to choose from.', 'Light and dark mode.', 'Sign-in screens with your own pictures and words.'],
     Scene: BrandScene },
+  { cls: ' spot-violet', label: 'Support', title: 'Every question in one inbox.',
+    lede: 'Chats from the portal, emails to your support address and tickets land in one place, with the customer’s plan, bills and connection beside them. Your team answers without hunting.',
+    ticks: ['Customer emails become tickets by themselves.', 'Quick replies, ratings and response times.', 'A diary of every call and visit, per customer.'],
+    Scene: SupportScene },
+  { cls: ' spot-teal', label: 'Network', title: 'Know before your customers call.',
+    lede: 'Every router is checked every 30 seconds. The moment one stops answering, your team hears about it in Telegram, Slack or email, with how many customers sit behind it.',
+    ticks: ['Graphs for every router: uptime, load and traffic.', 'Outages on a map, with the customers they affect.', 'A note when it is back, with how long it was down.'],
+    Scene: NetworkScene },
+  { cls: ' spot-coral', label: 'Field and stock', title: 'From the van to the front door.',
+    lede: 'Technicians get their jobs on their phone, tap through each step, take photos and get a signature. The router they fit leaves the van’s stock, and the customer is told when they are on the way.',
+    ticks: ['A day board to plan and assign jobs.', 'Every router and ONU tracked by serial number.', 'Works with a weak signal and catches up later.'],
+    Scene: FieldScene },
 ];
 
-// Three coloured cards that stack while scrolling. Label in the rail, copy from column 4, picture from column 8.
+// Six coloured cards that stack while scrolling. Label in the rail, copy from column 4, picture from column 8.
 export function Spotlights() {
   return (
     <section className="stack" aria-label="Highlights">

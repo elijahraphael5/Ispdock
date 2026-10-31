@@ -8,14 +8,22 @@ import { prefersStill } from '@/lib/site';
 type Geo = { x: number; y: number; sx: number; sy: number };
 const NS = 'http://www.w3.org/2000/svg';
 
-// Spotlight cards on narrow or short screens: stick each card where its whole height is still on screen
+// Spotlight cards: all the height of the tallest one, each stuck where its whole height is still on screen
 function useStick() {
   useEffect(() => {
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.stack .spot'));
     const small = window.matchMedia('(max-width: 1100px), (max-height: 759px)');
-    const set = () => cards.forEach((card, i) => {
-      if (!small.matches) { card.style.removeProperty('--stick'); return; }
-      card.style.setProperty('--stick', Math.min(80 + i * 12, window.innerHeight - card.offsetHeight - 12) + 'px');
+    const set = () => {
+      // every card the height of the tallest one, re-measured at each size
+      cards.forEach((card) => { card.style.minHeight = ''; });
+      const tallest = Math.max(...cards.map((c) => c.offsetHeight));
+      cards.forEach((card) => { card.style.minHeight = tallest + 'px'; });
+      stick();
+    };
+    // each card sticks a step below the one before, but never so low that its bottom leaves the screen
+    const stick = () => cards.forEach((card, i) => {
+      const step = small.matches ? 80 + i * 12 : 88 + i * 16;
+      card.style.setProperty('--stick', Math.min(step, window.innerHeight - card.offsetHeight - 12) + 'px');
     });
     set();
     window.addEventListener('resize', set);
@@ -213,7 +221,7 @@ export function ScrollMotion() {
         spots.forEach((spot, i) => {
           const next = spots[i + 1];
           if (!next) return;
-          gsap.to(spot, { scale: 0.94, '--dim': 0.3, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: 'top ' + (88 + (i + 1) * 22) + 'px', scrub: 0.5 } });
+          gsap.to(spot, { scale: 0.94, '--dim': 0.3, ease: 'none', scrollTrigger: { trigger: next, start: 'top bottom', end: () => 'top ' + (parseFloat(next.style.getPropertyValue('--stick')) || 88) + 'px', scrub: 0.5, invalidateOnRefresh: true } });
         });
       });
     });
