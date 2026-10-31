@@ -6,9 +6,9 @@ import { Typed } from './Typed';
 const BOXES = [
   { c: 'c-blue', side: 'left', src: '.ds-kpis > .tile:nth-child(2)', label: 'Customers', figure: '2,140 accounts', text: 'KYC, products and a diary for each one.' },
   { c: 'c-sun', side: 'left', src: '.tile-chart', label: 'Billing', figure: '₦197.8m invoiced', text: 'Invoices go out by themselves every month.' },
-  { c: 'c-green', side: 'left', src: '.ds-row-b > .tile:first-child', label: 'Auto reconnect', figure: 'Paid = back online', text: 'Overdue accounts are cut off by RADIUS and back on the moment they pay.' },
+  { c: 'c-green', side: 'left', src: '.ds-row-b > .tile:first-child', label: 'Auto reconnect', figure: 'Paid = back online', text: 'When a bill is due the connection goes off, and it is back the moment they pay.' },
   { c: 'c-violet', side: 'right', src: '.ds-kpis > .tile:nth-child(4)', label: 'Support', figure: '12 open tickets', text: 'Chat, tickets and customer email in one place.' },
-  { c: 'c-teal', side: 'right', src: '.ds-row:not(.ds-row-b) > .tile:last-child', label: 'Network', figure: 'Good · 96%', text: 'Routers, RADIUS and outages, watched every minute.' },
+  { c: 'c-teal', side: 'right', src: '.ds-row:not(.ds-row-b) > .tile:last-child', label: 'Network', figure: 'Good · 96%', text: 'Routers, connections and outages, watched every minute.' },
   { c: 'c-coral', side: 'right', src: '.ds-row-b > .tile:last-child', label: 'Stock', figure: '438 devices', text: 'Routers and ONUs tracked by serial number.' },
 ];
 

@@ -2,7 +2,7 @@ import { Head } from './Head';
 
 const STEPS = [
   ['Bring your customer list', 'Send us your spreadsheet. Your customers and their plans come across in one import.'],
-  ['Connect your routers', 'We link your MikroTik routers to RADIUS and give you the exact commands to paste in.'],
+  ['Connect your routers', 'We connect your MikroTik routers to ISPDock and give you the exact commands to paste in.'],
   ['Your addresses and email', 'admin., my. and mail. on your own domain, with the records to add listed for you.'],
   ['Train your team, then send logins', 'Your staff learn it first. Then every customer gets their portal login in one go.'],
 ];

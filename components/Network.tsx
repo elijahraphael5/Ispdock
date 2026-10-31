@@ -13,12 +13,12 @@ export function Network() {
   return (
     <section className="section section-dark has-globe" id="network">
       <div className="wrap grid">
-        <Head label="Network · Enterprise" title="Know about a problem before your customers call." lede="As you grow, the network becomes the hard part. These tools come with Enterprise. RADIUS comes with every plan." />
+        <Head label="Network · Enterprise" title="Know about a problem before your customers call." lede="As you grow, the network becomes the hard part. These tools come with Enterprise. Customer logins and automatic cut-off come with every plan." />
         <div className="net">
           {TOOLS.map(([label, title, text]) => (
             <article className="net-card reveal" key={label}><span className="label">{label}</span><h3>{title}</h3><p>{text}</p></article>
           ))}
-          <article className="net-card net-card-all reveal"><span className="label">Every plan</span><h3>RADIUS, on every plan</h3><p>PPPoE and static IP logins on MikroTik, suspended when a bill is overdue and reconnected the moment it is paid. Hotspot and MAC logins come with Enterprise.</p></article>
+          <article className="net-card net-card-all reveal"><span className="label">Every plan</span><h3>Logins and cut-off, on every plan</h3><p>PPPoE and static IP logins on MikroTik, suspended when a bill is due and reconnected the moment it is paid. Hotspot and MAC logins come with Enterprise.</p></article>
         </div>
       </div>
       <Globe />

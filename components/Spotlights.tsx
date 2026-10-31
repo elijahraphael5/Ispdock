@@ -5,7 +5,7 @@ import { PortalScene } from './scenes/PortalScene';
 const SPOTS = [
   { cls: '', label: 'Billing', title: 'Billing that runs itself.',
     lede: 'Invoices go out on each renewal date, payments land on the right bill and receipts are emailed. When a bill is due, the customer’s internet connection is suspended, and it comes back the moment they pay.',
-    ticks: ['Monthly invoices, renewals and receipts, numbered and in your name.', 'A bill is marked paid only after the payment is confirmed.', 'Suspend and reconnect through RADIUS, with no one on your team lifting a finger.'],
+    ticks: ['Monthly invoices, renewals and receipts, numbered and in your name.', 'A bill is marked paid only after the payment is confirmed.', 'Connections suspend and reconnect by themselves, with no one on your team lifting a finger.'],
     Scene: PayScene },
   { cls: ' spot-green', label: 'Customer portal', title: 'A portal your customers actually understand.',
     lede: 'No IP addresses, no jargon. Days left on their plan, what they owe, how much data they used and whether they are online. In real figures, in plain words.',
