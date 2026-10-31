@@ -1,5 +1,5 @@
-// Where "Book a demo" and the contact links go. Change this one line when the inbox moves.
-export const CONTACT = 'mailto:hello@ispdock.com?subject=ISPDock%20demo';
+// Where every "Book a demo" button goes (the Calendly booking page). Change this one line to move it.
+export const CONTACT = 'https://calendly.com/elijahraphael5/30min';
 export const CONTACT_EMAIL = 'hello@ispdock.com';
 
 // Plans: keep equal to the platform's pricing sheet (docs/pricing.md in isp-platform).
