@@ -319,8 +319,9 @@
     }
   }
 
-  // Network globe: dotted land (Natural Earth, 1.25° rows), lines running out from Lagos, turning on its own and by drag.
-  // Plain canvas, no library. Stops while off screen; holds still for reduced motion.
+  // Network globe: the top half of a dotted earth (Natural Earth land, 1.25° rows) on the section's bottom edge,
+  // turning all the time, with arrows running along the connections in a loop. Plain canvas, no library.
+  // Pauses off screen and in background tabs; holds still for reduced motion.
   (function () {
     var canvas = document.querySelector('.globe-canvas');
     if (!canvas || !canvas.getContext) return;
@@ -328,50 +329,47 @@
     var LAND = '|1e,4|1e,2|1g,3|1h,3|1i,4|1j,5|1l,5|1m,4,5d,2|1p,4,5i,2|1q,5,59,1,5n,2|1r,6,5d,1,5s,1|1s,5,1y,1,5h,1,5w,3|1t,7,62,1|1v,9,5m,2,66,2|1w,a,5n,7|1x,a,5p,1,5r,7|1z,9,29,2,3n,1,5f,2,5u,8|20,d,3o,6,5h,6,5u,b|22,d,3q,8,5k,8,5x,c|22,e,3s,8,5n,p|23,f,3t,a,5p,q|24,g,3u,b,5r,r|26,f,3v,c,5t,s|27,g,3w,d,5w,s|28,g,3y,e,4j,2,5y,t|28,j,3z,f,4k,3,5z,s|29,m,40,g,4m,3,62,q|2a,m,41,g,4n,4,65,p,77,1|2b,m,41,h,4p,3,6a,l|2b,n,42,i,4q,4,6d,i|2b,p,42,l,4r,4,6f,d,6t,4|2a,r,44,l,4t,4,6i,a,6v,3|29,s,45,m,4w,2,6l,2,6o,4,6x,3|29,t,46,m,4y,1,6p,5,6y,2|28,v,47,l,6s,3,6z,1|28,w,48,l,71,1|28,y,48,l,6k,1,76,2,7g,1|28,z,49,l,6i,6,6q,1,72,2,76,2,7f,1|28,z,49,l,6c,5,6v,1,71,7|27,10,49,l,6b,1,71,7,79,2|27,z,49,m,6a,2,6o,2,70,8,7c,1|27,x,48,n,69,3,6j,1,6o,1,6s,1,6v,1,6x,9|27,p,2x,3,48,p,69,3,6g,5,6n,2,71,3|27,s,47,r,68,3,6g,6,6p,1,6x,2|28,n,47,r,67,4,6f,7|29,n,48,s,67,3,6f,8|2a,l,48,t,66,2,69,2,6h,5|2a,l,47,u,64,2,68,2,6i,3|2a,j,3s,7,44,y,63,1,68,2,6k,3|2a,f,3q,1c,5r,1,67,1,6q,1|26,1,29,f,3o,1e,5q,1,65,1,6n,4|24,3,28,1,2a,c,3o,1e,5m,2,5p,1,64,1,6p,1|22,2,2a,8,2j,1,2l,1,3m,1g,5l,3,68,1|21,2,2c,1,3k,1b,50,1,5k,3,62,1,66,4,6m,1|20,3,3j,1c,5j,4,61,9|1x,6,3j,19,4t,4,5h,5,60,8,6h,2|1v,7,3i,18,4s,7,5g,5,5y,9,6g,1|1q,8,3h,17,4r,7,5e,7,5u,2,5x,8,6e,2|1o,a,3h,15,4p,a,5d,7,5t,9,6d,1|1l,6,1v,3,29,3,3g,14,4n,d,5b,9,5r,9,62,2|1k,6,1v,2,25,2,3f,14,4l,d,5a,a,5p,a|1k,6,1w,1,23,1,3d,15,4j,f,56,d,5m,c,60,1|1j,6,1z,3,3d,13,4i,f,55,f,5l,h,66,1|1e,1,1h,7,3c,12,4f,a,4q,3,51,11,63,1|1d,1,1g,8,3b,10,4d,9,4q,1,4u,2,4y,12|1c,1,1f,8,1y,2,3b,y,4b,a,4q,19|1a,2,1d,a,1x,2,3a,x,49,9,4k,1d|1a,1,1c,b,1w,1,38,1,3b,15,4i,1d|18,1,1a,i,1t,3,3a,14,4f,1d|17,p,38,i,3t,4,43,1n,5w,1|16,p,31,1,37,f,3r,1,41,1l,5r,3|15,r,37,b,3z,1k,5s,2|13,t,35,1,37,a,3p,1,3v,1,3x,1i,5k,2,5o,4|11,u,34,1,39,6,3r,1,3t,1,3v,1j,5i,1,5o,3|11,s,30,5,3e,2,3j,2,3n,e,44,15,5a,1,5e,2,5m,1|z,t,2y,6,39,1,3e,1,3h,2,3k,e,41,14,5a,2,5j,1|y,v,2x,5,37,1,3b,1,3e,3,3i,e,3y,16,55,4,5g,1|y,v,2v,6,35,1,38,2,3c,5,3j,3,3p,4,3w,1a|x,v,2s,7,33,3,38,6,3m,3,3s,1a,53,1,58,2|w,w,1t,1,2v,5,31,2,34,8,3i,5,3p,1c,55,2|w,w,1t,2,2t,7,31,9,3c,8,3m,1d,51,1|v,w,1t,1,2q,l,3c,6,3k,1b|u,w,1t,3,2n,25|t,t,1n,2,1s,2,2m,22,4p,1|r,v,1o,1,2h,1,2l,1z,4l,1,4r,1|q,n,1e,b,2g,2,2j,1y,4n,1|p,m,1d,b,2a,2,2d,3,2h,1u,4i,2|m,o,1b,b,28,2,2b,1,2h,1o,47,1,4e,2|l,n,1b,7,26,1,28,1,2f,1,2k,1g,49,3|9,1,k,l,18,1,1a,6,25,1,2b,1,2d,2,2h,1g,44,4|b,1,j,i,18,6,2a,2,2f,1e,40,3|7,4,h,i,16,4,1b,1,24,2,27,2,2c,1c,3s,1,3w,2|5,8,e,k,15,3,1h,1,21,9,2b,1e,3s,1|5,s,13,2,1e,2,1z,4,25,1f,3l,1,3n,3|6,q,z,1,14,1,1c,3,1w,5,22,1m|7,p,x,2,12,2,19,4,1j,2,1u,4,1z,1i|0,1,2,3,v,3,12,5,1b,6,1k,9,1w,1,20,2|3,3,v,3,12,2,1a,g,1w,1,1y,2,28,1|1,4,k,2,o,2,u,1,z,4,19,e,1v,2|5,7,e,4,j,3,n,1,p,1,r,1,u,2,11,7,1l,2,1q,3,1u,3,1y,1,20,2|5,4,h,4,m,2,p,5,y,8,1i,3,1s,1,1v,p|0,e,f,1,j,1,m,1,r,4,14,j,1o,3,1u,1,26,2,2c,7|d,1,f,5,l,3,u,7,1j,1,1n,1,1q,b|c,2,j,1,r,8,1n,4|d,2,g,4,p,8,1c,1,1i,6,1s,3|h,2,l,8,1g,2|b,1,e,1,g,1,j,9,x,2|b,1,d,1,f,1,h,7,t,2,16,1';
     var RAD = Math.PI / 180, STEP = 1.25, LAT0 = -56;
     var vec = function (lat, lon) { var a = lat * RAD, b = lon * RAD; return [Math.cos(a) * Math.sin(b), Math.sin(a), Math.cos(a) * Math.cos(b)]; };
-    // land dots as unit vectors
     var dots = [];
     LAND.split('|').forEach(function (row, r) {
       if (!row) return;
       var lat = LAT0 + r * STEP, n = Math.max(1, Math.round(360 * Math.cos(lat * RAD) / STEP)), v = row.split(',').map(function (x) { return parseInt(x, 36); });
       for (var k = 0; k < v.length; k += 2) for (var i = v[k]; i < v[k] + v[k + 1]; i++) dots.push(vec(lat, -180 + (i + 0.5) * 360 / n));
     });
-    var HOME = { name: 'Lagos', lat: 6.45, lon: 3.39 };
-    // kind: site (solid), plan (hollow), up (uplink / cable landing abroad)
-    var PLACES = [
-      { lat: 7.38, lon: 3.94, kind: 'site' }, { lat: 9.06, lon: 7.49, kind: 'site' }, { lat: 4.82, lon: 7.03, kind: 'site' },
-      { lat: 6.44, lon: 7.5, kind: 'site' }, { lat: 6.34, lon: 5.62, kind: 'site' }, { lat: 12.0, lon: 8.52, kind: 'site' },
-      { lat: 10.52, lon: 7.44, kind: 'plan' }, { lat: 9.9, lon: 8.86, kind: 'plan' }, { lat: 7.73, lon: 8.52, kind: 'plan' },
-      { lat: 5.6, lon: -0.19, kind: 'up' }, { lat: 14.7, lon: -17.47, kind: 'up' }, { lat: 38.72, lon: -9.14, kind: 'up' },
-      { lat: 51.5, lon: -0.13, kind: 'up' }, { lat: 43.3, lon: 5.37, kind: 'up' }, { lat: -33.92, lon: 18.42, kind: 'up' },
-      { lat: -1.29, lon: 36.82, kind: 'up' }, { lat: 30.04, lon: 31.24, kind: 'up' }
-    ];
-    var home = vec(HOME.lat, HOME.lon);
-    // each line: points along the great circle from Lagos, lifted off the surface in the middle
-    var lines = PLACES.map(function (p, i) {
-      var b = vec(p.lat, p.lon), dot = home[0] * b[0] + home[1] * b[1] + home[2] * b[2];
-      var w = Math.acos(Math.max(-1, Math.min(1, dot))), s = Math.sin(w), pts = [], N = 48, lift = Math.min(0.32, 0.04 + w * 0.22);
+    // hubs: Lagos is the POP; the rest are where the internet comes in from, so some line is always on the visible side
+    var P = {
+      lagos: [6.45, 3.39], abuja: [9.06, 7.49], ph: [4.82, 7.03], kano: [12.0, 8.52], accra: [5.6, -0.19],
+      london: [51.5, -0.13], lisbon: [38.72, -9.14], marseille: [43.3, 5.37], ny: [40.71, -74.0], miami: [25.76, -80.19],
+      saopaulo: [-23.55, -46.63], capetown: [-33.92, 18.42], joburg: [-26.2, 28.04], nairobi: [-1.29, 36.82], cairo: [30.04, 31.24],
+      dubai: [25.2, 55.27], mumbai: [19.08, 72.88], singapore: [1.35, 103.82], tokyo: [35.68, 139.69], sydney: [-33.87, 151.21], la: [34.05, -118.24]
+    };
+    var LINKS = [['lagos', 'abuja'], ['lagos', 'ph'], ['lagos', 'kano'], ['lagos', 'accra'], ['lagos', 'lisbon'], ['lagos', 'london'],
+      ['lagos', 'marseille'], ['lagos', 'capetown'], ['lagos', 'saopaulo'], ['lagos', 'nairobi'], ['lagos', 'cairo'], ['lagos', 'ny'],
+      ['london', 'ny'], ['lisbon', 'miami'], ['marseille', 'dubai'], ['dubai', 'mumbai'], ['mumbai', 'singapore'], ['singapore', 'tokyo'],
+      ['tokyo', 'la'], ['singapore', 'sydney'], ['la', 'ny'], ['miami', 'saopaulo'], ['capetown', 'joburg'], ['joburg', 'mumbai'], ['nairobi', 'dubai']];
+    var lines = LINKS.map(function (l, i) {
+      var a = vec(P[l[0]][0], P[l[0]][1]), b = vec(P[l[1]][0], P[l[1]][1]), dot = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      var w = Math.acos(Math.max(-1, Math.min(1, dot))), s = Math.sin(w), pts = [], N = 56, lift = Math.min(0.3, 0.05 + w * 0.2);
       for (var k = 0; k <= N; k++) {
         var t = k / N, f1 = Math.sin((1 - t) * w) / s, f2 = Math.sin(t * w) / s, h = 1 + lift * Math.sin(Math.PI * t);
-        pts.push([(home[0] * f1 + b[0] * f2) * h, (home[1] * f1 + b[1] * f2) * h, (home[2] * f1 + b[2] * f2) * h]);
+        pts.push([(a[0] * f1 + b[0] * f2) * h, (a[1] * f1 + b[1] * f2) * h, (a[2] * f1 + b[2] * f2) * h]);
       }
-      return { p: p, v: b, pts: pts, phase: (i * 0.137) % 1, speed: 0.22 + 0.5 / (0.6 + w * 3) };
+      return { pts: pts, home: l[0] === 'lagos', phase: (i * 0.173) % 1, speed: 0.18 + 0.35 / (0.6 + w * 2.5) };
     });
+    var hubs = Object.keys(P).map(function (k) { return { v: vec(P[k][0], P[k][1]), pop: k === 'lagos', ng: ['abuja', 'ph', 'kano'].indexOf(k) >= 0 }; });
 
     var still = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var lon0 = -4, lat0 = 16, spin = still ? 0 : 5, vel = 0; // degrees, degrees per second
-    var size = 0, dpr = 1, R = 0, cx = 0, cy = 0;
-    var C = { pop: '#FBBC04', site: '#4C8DF6', line: '142,166,255' };
+    var lon0 = -10, lat0 = -22, SPIN = 6; // centre of the view in degrees; degrees per second
+    var W = 0, H = 0, dpr = 1, R = 0, cx = 0, cy = 0;
     var css = getComputedStyle(document.documentElement);
     var tok = function (n, f) { var v = css.getPropertyValue(n).trim(); return v || f; };
-    C.pop = tok('--c-yellow', C.pop); C.site = tok('--c-blue', C.site);
+    var POP = tok('--c-yellow', '#FBBC04'), SITE = tok('--c-blue', '#4C8DF6'), LINE = '142,166,255';
 
     var resize = function () {
       var r = canvas.getBoundingClientRect();
-      dpr = Math.min(2, window.devicePixelRatio || 1); size = r.width;
-      canvas.width = Math.round(r.width * dpr); canvas.height = Math.round(r.height * dpr);
-      R = size * 0.4; cx = size / 2; cy = size / 2;
+      dpr = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height;
+      canvas.width = Math.round(W * dpr); canvas.height = Math.round(H * dpr);
+      R = Math.min(H / 1.12, W * 0.62); cx = W / 2; cy = H; // centre on the bottom edge: only the top half shows
     };
-    // rotate a world vector into view space: turn by lon0 around the pole, tilt by lat0
     var sl, cl, st, ct;
     var setRot = function () { sl = Math.sin(-lon0 * RAD); cl = Math.cos(-lon0 * RAD); st = Math.sin(lat0 * RAD); ct = Math.cos(lat0 * RAD); };
     var view = function (v, out) {
@@ -379,54 +377,24 @@
       out[0] = x; out[1] = y * ct - z * st; out[2] = y * st + z * ct; return out;
     };
     var tmp = [0, 0, 0], tmp2 = [0, 0, 0];
-    var shown = function (q) { return q[2] > 0 || q[0] * q[0] + q[1] * q[1] > 1.0001; };
-
-    var rings = [{ tilt: 72, turn: -18, r: 1.22, a: 0.16 }, { tilt: 64, turn: 26, r: 1.32, a: 0.1 }];
-    var ring = function (g, front, t) {
-      ctx.beginPath();
-      var started = false, ta = g.tilt * RAD, tb = (g.turn + t * 2) * RAD;
-      for (var k = 0; k <= 120; k++) {
-        var a = k / 120 * Math.PI * 2, x = Math.cos(a) * g.r, y = Math.sin(a) * g.r * Math.cos(ta), z = Math.sin(a) * g.r * Math.sin(ta);
-        var X = x * Math.cos(tb) - y * Math.sin(tb), Y = x * Math.sin(tb) + y * Math.cos(tb);
-        var vis = front ? z > 0 : z <= 0;
-        if (vis) { if (!started) { ctx.moveTo(cx + X * R, cy - Y * R); started = true; } else ctx.lineTo(cx + X * R, cy - Y * R); } else started = false;
-      }
-      ctx.strokeStyle = 'rgba(' + C.line + ',' + g.a + ')'; ctx.lineWidth = 1; ctx.stroke();
-    };
-    var pin = function (q, kind, t) {
-      var x = cx + q[0] * R, y = cy - q[1] * R, face = Math.max(0, q[2]);
-      if (q[2] <= 0) return;
-      var col = kind === 'pop' ? C.pop : C.site, s = kind === 'pop' ? 5 : 3.2;
-      ctx.globalAlpha = 0.35 + face * 0.65;
-      if (kind === 'plan') { ctx.strokeStyle = col; ctx.lineWidth = 1.4; ctx.strokeRect(x - s, y - s, s * 2, s * 2); }
-      else {
-        ctx.shadowColor = col; ctx.shadowBlur = kind === 'pop' ? 18 : 10; ctx.fillStyle = col;
-        ctx.fillRect(x - s, y - s, s * 2, s * 2); ctx.shadowBlur = 0;
-      }
-      if (kind === 'pop' && !still) { // a square ping spreading out from the POP
-        var p = (t * 0.5) % 1, d = s + p * 22; ctx.globalAlpha = (1 - p) * face; ctx.strokeStyle = col; ctx.lineWidth = 1.2; ctx.strokeRect(x - d, y - d, d * 2, d * 2);
-      }
-      ctx.globalAlpha = 1;
-    };
+    var shown = function (q) { return q[1] > -0.02 && (q[2] > 0 || q[0] * q[0] + q[1] * q[1] > 1.0001); };
+    var X = function (q) { return cx + q[0] * R; }, Y = function (q) { return cy - q[1] * R; };
 
     var draw = function (t) {
       setRot();
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, size, size);
-      rings.forEach(function (g) { ring(g, false, t); });
-      // the sphere itself: a dark disc with a soft rim so the back stays hidden
-      var gr = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.4, R * 0.1, cx, cy, R);
-      gr.addColorStop(0, 'rgba(30,40,70,0.55)'); gr.addColorStop(1, 'rgba(8,11,22,0.9)');
-      ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = gr; ctx.fill();
-      ctx.strokeStyle = 'rgba(' + C.line + ',0.28)'; ctx.lineWidth = 1; ctx.stroke();
-      // land dots, brighter toward the middle and the light side, batched by brightness
-      var buckets = [[], [], [], [], [], []], ds = Math.max(1.1, size / 360);
+      ctx.clearRect(0, 0, W, H);
+      var gr = ctx.createRadialGradient(cx - R * 0.3, cy - R * 0.55, R * 0.1, cx, cy, R);
+      gr.addColorStop(0, 'rgba(30,40,70,0.6)'); gr.addColorStop(1, 'rgba(8,11,22,0.95)');
+      ctx.beginPath(); ctx.arc(cx, cy, R, Math.PI, 0); ctx.fillStyle = gr; ctx.fill();
+      ctx.strokeStyle = 'rgba(' + LINE + ',0.3)'; ctx.lineWidth = 1; ctx.stroke();
+      // land dots, brighter toward the middle and the lit side, batched by brightness
+      var buckets = [[], [], [], [], [], []], ds = Math.max(1.2, R / 210);
       for (var i = 0; i < dots.length; i++) {
         var q = view(dots[i], tmp);
-        if (q[2] <= 0.02) continue;
-        var light = q[2] * 0.75 + (q[1] * 0.25 - q[0] * 0.2) * 0.5;
-        var b = Math.max(0, Math.min(5, Math.floor(light * 6)));
-        buckets[b].push(cx + q[0] * R, cy - q[1] * R, 0.6 + q[2] * 0.4);
+        if (q[2] <= 0.02 || q[1] < -0.01) continue;
+        var light = q[2] * 0.75 + (q[1] * 0.3 - q[0] * 0.2) * 0.5;
+        buckets[Math.max(0, Math.min(5, Math.floor(light * 6)))].push(X(q), Y(q), 0.6 + q[2] * 0.4);
       }
       buckets.forEach(function (list, b) {
         if (!list.length) return;
@@ -435,60 +403,54 @@
         for (var k = 0; k < list.length; k += 3) { var w = ds * list[k + 2]; ctx.rect(list[k] - w / 2, list[k + 1] - w / 2, w, w); }
         ctx.fill();
       });
-      // lines from Lagos, with a light running out along each
+      // the connections, each with an arrow running along it and starting again at the far end
       lines.forEach(function (L) {
-        var up = L.p.kind === 'up';
         ctx.beginPath(); var on = false;
         for (var k = 0; k < L.pts.length; k++) {
           var q = view(L.pts[k], tmp);
-          if (shown(q)) { var X = cx + q[0] * R, Y = cy - q[1] * R; if (!on) { ctx.moveTo(X, Y); on = true; } else ctx.lineTo(X, Y); } else on = false;
+          if (shown(q)) { if (!on) { ctx.moveTo(X(q), Y(q)); on = true; } else ctx.lineTo(X(q), Y(q)); } else on = false;
         }
-        ctx.strokeStyle = up ? 'rgba(' + C.line + ',0.42)' : 'rgba(' + C.line + ',0.9)'; ctx.lineWidth = up ? 1 : 1.5; ctx.stroke();
-        if (still) return;
-        // a comet running out from Lagos: a bright head and a fading tail
-        var f = (t * L.speed + L.phase) % 1, last = L.pts.length - 1, head = Math.floor(f * last), fade = Math.sin(Math.PI * f), TAIL = up ? 10 : 6;
+        ctx.strokeStyle = 'rgba(' + LINE + ',' + (L.home ? 0.7 : 0.38) + ')'; ctx.lineWidth = L.home ? 1.4 : 1; ctx.stroke();
+        var f = still ? 0.55 : (t * L.speed + L.phase) % 1, last = L.pts.length - 1, head = Math.max(2, Math.round(f * last)), TAIL = 9;
+        var col = L.home ? '255,214,102' : '255,255,255';
         ctx.lineCap = 'round';
         for (var j = Math.max(1, head - TAIL); j <= head; j++) {
           var qa = view(L.pts[j - 1], tmp), qb = view(L.pts[j], tmp2);
           if (!shown(qa) || !shown(qb)) continue;
           var k2 = 1 - (head - j) / TAIL;
-          ctx.strokeStyle = up ? 'rgba(255,255,255,' + (k2 * fade) + ')' : 'rgba(' + C.line + ',' + (k2 * fade) + ')';
-          ctx.lineWidth = 1 + k2 * 2;
-          ctx.beginPath(); ctx.moveTo(cx + qa[0] * R, cy - qa[1] * R); ctx.lineTo(cx + qb[0] * R, cy - qb[1] * R); ctx.stroke();
+          ctx.strokeStyle = 'rgba(' + col + ',' + (k2 * 0.9) + ')'; ctx.lineWidth = 1 + k2 * 1.8;
+          ctx.beginPath(); ctx.moveTo(X(qa), Y(qa)); ctx.lineTo(X(qb), Y(qb)); ctx.stroke();
         }
         ctx.lineCap = 'butt';
+        var h0 = view(L.pts[head - 1], tmp), h1 = view(L.pts[head], tmp2);
+        if (!shown(h0) || !shown(h1)) return;
+        var ang = Math.atan2(Y(h1) - Y(h0), X(h1) - X(h0)), s = L.home ? 7 : 6;
+        ctx.save(); ctx.translate(X(h1), Y(h1)); ctx.rotate(ang);
+        ctx.fillStyle = 'rgb(' + col + ')'; ctx.shadowColor = 'rgb(' + col + ')'; ctx.shadowBlur = 10;
+        ctx.beginPath(); ctx.moveTo(s, 0); ctx.lineTo(-s * 0.7, -s * 0.6); ctx.lineTo(-s * 0.35, 0); ctx.lineTo(-s * 0.7, s * 0.6); ctx.closePath(); ctx.fill();
+        ctx.restore();
       });
-      lines.forEach(function (L) { if (L.p.kind !== 'up') pin(view(L.v, tmp), L.p.kind, t); else { var q = view(L.v, tmp); if (q[2] > 0) { ctx.globalAlpha = 0.4 + q[2] * 0.6; ctx.fillStyle = '#FFFFFF'; ctx.fillRect(cx + q[0] * R - 2, cy - q[1] * R - 2, 4, 4); ctx.globalAlpha = 1; } } });
-      var hq = view(home, tmp);
-      pin(hq, 'pop', t);
-      if (hq[2] > 0.15) { // the POP's name, like a map label
-        ctx.globalAlpha = Math.min(1, (hq[2] - 0.15) * 3);
-        ctx.font = '500 ' + Math.max(10, size / 52) + 'px "JetBrains Mono", ui-monospace, monospace';
-        var lx = cx + hq[0] * R, ly = cy - hq[1] * R, tx = lx - size * 0.2, ty = ly - size * 0.1;
-        ctx.strokeStyle = 'rgba(245,245,247,0.5)'; ctx.lineWidth = 1;
-        ctx.beginPath(); ctx.moveTo(lx - 7, ly - 7); ctx.lineTo(tx + size * 0.05, ty); ctx.lineTo(tx - 4, ty); ctx.stroke();
-        ctx.fillStyle = '#F5F5F7'; ctx.textAlign = 'right'; ctx.fillText('LAGOS · POP', tx - 10, ty + 4); ctx.textAlign = 'left'; ctx.globalAlpha = 1;
-      }
-      rings.forEach(function (g) { ring(g, true, t); });
+      hubs.forEach(function (h) {
+        var q = view(h.v, tmp);
+        if (q[2] <= 0 || q[1] < 0) return;
+        var x = X(q), y = Y(q), s = h.pop ? 5 : h.ng ? 3.5 : 2.5, col = h.pop ? POP : h.ng ? SITE : '#FFFFFF';
+        ctx.globalAlpha = 0.4 + q[2] * 0.6;
+        ctx.fillStyle = col; ctx.shadowColor = col; ctx.shadowBlur = h.pop ? 18 : 8;
+        ctx.fillRect(x - s, y - s, s * 2, s * 2); ctx.shadowBlur = 0;
+        if (h.pop && !still) { var p = (t * 0.5) % 1, d = s + p * 22; ctx.globalAlpha = (1 - p) * q[2]; ctx.strokeStyle = col; ctx.lineWidth = 1.2; ctx.strokeRect(x - d, y - d, d * 2, d * 2); }
+        if (h.pop && q[2] > 0.2) {
+          ctx.globalAlpha = Math.min(1, (q[2] - 0.2) * 3);
+          ctx.font = '500 ' + Math.max(10, R / 40) + 'px "JetBrains Mono", ui-monospace, monospace';
+          ctx.fillStyle = '#F5F5F7'; ctx.fillText('LAGOS · POP', x + 14, y - 10);
+        }
+        ctx.globalAlpha = 1;
+      });
     };
 
-    // turning: on its own, and by drag (sideways turns, up/down tilts); a flick keeps going and eases back to the slow turn
-    var dragging = false, lastX = 0, lastY = 0, lastT = 0, running = false, visible = false, prev = 0, clock = 0;
-    canvas.addEventListener('pointerdown', function (e) { dragging = true; lastX = e.clientX; lastY = e.clientY; lastT = performance.now(); vel = 0; canvas.setPointerCapture(e.pointerId); });
-    canvas.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      var now = performance.now(), dx = e.clientX - lastX, dy = e.clientY - lastY, k = 180 / (Math.PI * R);
-      lon0 -= dx * k; lat0 = Math.max(-35, Math.min(60, lat0 + dy * k));
-      vel = -dx * k / Math.max(1, now - lastT) * 1000; lastX = e.clientX; lastY = e.clientY; lastT = now;
-      if (!running) draw(clock);
-    });
-    var up = function () { dragging = false; };
-    canvas.addEventListener('pointerup', up); canvas.addEventListener('pointercancel', up);
-
+    var running = false, visible = false, prev = 0, clock = 0;
     var frame = function (now) {
       if (!running) return;
-      var dt = Math.min(0.05, (now - prev) / 1000); prev = now; clock += dt;
-      if (!dragging) { vel += (spin - vel) * Math.min(1, dt * 1.5); lon0 += vel * dt; }
+      var dt = Math.min(0.05, (now - prev) / 1000); prev = now; clock += dt; lon0 += SPIN * dt;
       draw(clock);
       requestAnimationFrame(frame);
     };
