@@ -80,7 +80,7 @@ const sections: LegalSection[] = [
       <>
         <p>We keep personal data only as long as we need it for the purposes above or the law requires. As a guide:</p>
         <ul>
-          <li>company and staff account data: while the account is open, then up to six months after it closes (so it can be exported or restored), unless the company asks us to delete it sooner;</li>
+          <li>company and staff account data: while the account is open, then up to six months after it closes (so a copy can be sent or the account restored), unless the company asks us to delete it sooner;</li>
           <li>invoices and payment records: up to six years, as tax and accounting law requires;</li>
           <li>audit logs and change history: up to two years; in-app notifications: 90 days;</li>
           <li>connection records processed for companies: up to about 13 months;</li>

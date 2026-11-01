@@ -19,7 +19,7 @@ const sections: LegalSection[] = [
     body: (
       <ul>
         <li>Subscriptions are paid monthly in advance and are not refunded, in full or in part, including for a month you stop using part-way through.</li>
-        <li>You can cancel at any time. Nothing more is charged after you cancel, and the service stays available until the end of the month you have paid for.</li>
+        <li>You can cancel at any time by emailing {mail}. Nothing more is charged after you cancel, and the service stays available until the end of the month you have paid for.</li>
         <li>Moving to a smaller plan takes effect from your next billing month.</li>
       </ul>
     ),

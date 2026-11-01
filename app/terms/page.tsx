@@ -15,7 +15,7 @@ const sections: LegalSection[] = [
     body: (
       <>
         <p>These terms are an agreement between {COMPANY.legalName} ({COMPANY.rc}) (&ldquo;Metasoft&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), which owns and runs ISPDock, and the business that signs up for it (&ldquo;you&rdquo;, the &ldquo;company&rdquo;). They cover the ISPDock platform: the company dashboard, the customer portal, the apps and the related services (together, the &ldquo;service&rdquo;).</p>
-        <p>By creating an account, paying an invoice or using the service you accept these terms, our <a href="/privacy">privacy policy</a>, <a href="/refunds">refund policy</a> and <a href="/cookies">cookie policy</a>. If you accept for a business, you confirm you are allowed to bind it. If a separate written agreement signed by both sides says something different, that agreement wins.</p>
+        <p>By accepting these terms in the dashboard, paying an invoice or using the service you accept these terms, our <a href="/privacy">privacy policy</a>, <a href="/refunds">refund policy</a> and <a href="/cookies">cookie policy</a>. If you accept for a business, you confirm you are allowed to bind it. If a separate written agreement signed by both sides says something different, that agreement wins.</p>
       </>
     ),
   },
@@ -100,9 +100,9 @@ const sections: LegalSection[] = [
     id: 'ending', title: 'Cancelling and ending the agreement',
     body: (
       <ul>
-        <li>You can cancel at any time by telling us at {mail} or through the dashboard. Cancelling stops future billing; the service stays available until the end of the month you have paid for.</li>
+        <li>You can cancel at any time by emailing {mail} from your account&rsquo;s email address or a company admin&rsquo;s. Cancelling stops future billing; the service stays available until the end of the month you have paid for.</li>
         <li>We may end the agreement with 30 days&rsquo; notice, or straight away if you seriously break these terms (including non-payment after reminders) and do not fix it within 14 days of our notice.</li>
-        <li>After the agreement ends you can ask for an export of your data for 30 days. After that we delete your data from the live service; copies in backups are removed on their normal cycle. We keep records the law requires (for example invoices).</li>
+        <li>For 30 days after the agreement ends you can ask us by email for a copy of your data, and we will send it to you. We delete your data from the live service within six months after the agreement ends, or sooner if you ask; copies in backups are removed on their normal cycle. We keep records the law requires (for example invoices).</li>
       </ul>
     ),
   },
@@ -126,7 +126,7 @@ const sections: LegalSection[] = [
   },
   {
     id: 'changes', title: 'Changes to these terms',
-    body: <p>We may update these terms. If a change matters to you we will tell you by email or in the dashboard at least 30 days before it takes effect. If you do not agree, you can cancel before then. Continuing to use the service after that means you accept the new terms.</p>,
+    body: <p>We may update these terms. If a change matters to you we will tell you by email or in the dashboard at least 30 days before it takes effect, and ask a company admin to accept the new version in the dashboard. If you do not agree, you can cancel before then. Continuing to use the service after that means you accept the new terms.</p>,
   },
   {
     id: 'law', title: 'Law and disputes',
