@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter, Inter_Tight, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
+import { CookieBanner } from '@/components/CookieBanner';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--ff-inter', display: 'swap' });
 // Variable font (every weight from 100 to 900): the footer wordmark morphs along its weight axis
@@ -38,7 +39,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{ __html: BOOT }} />
       </head>
       {/* browser extensions add attributes to body before React loads */}
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>{children}<CookieBanner /></body>
     </html>
   );
 }

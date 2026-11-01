@@ -6,7 +6,8 @@ import { ContactLink } from './ContactLink';
 
 const LINKS = [['#product', 'Product'], ['#network', 'Network'], ['#pricing', 'Pricing'], ['#faq', 'FAQ']];
 
-export function Nav() {
+// `base` = '/' on pages other than the home page, so the section links lead back to it
+export function Nav({ base = '' }: { base?: string }) {
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
 
@@ -41,10 +42,10 @@ export function Nav() {
   return (
     <header className="nav" id="top">
       <div className="wrap nav-in">
-        <a className="brand" href="#top" aria-label="ISPDock home"><Mark /><span>ISPDock</span></a>
+        <a className="brand" href={base ? '/' : '#top'} aria-label="ISPDock home"><Mark /><span>ISPDock</span></a>
         <nav aria-label="Main">
           <ul className={'nav-links' + (open ? ' open' : '')} id="navLinks" onClick={(e) => { if ((e.target as HTMLElement).closest('a')) setOpen(false); }}>
-            {LINKS.map(([href, text]) => <li key={href}><a href={href}>{text}</a></li>)}
+            {LINKS.map(([href, text]) => <li key={href}><a href={base + href}>{text}</a></li>)}
           </ul>
         </nav>
         <button className="theme-btn" type="button" aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'} onClick={flip}>

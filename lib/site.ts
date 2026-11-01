@@ -2,6 +2,17 @@
 export const CONTACT = 'https://calendly.com/elijahraphael5/30min';
 export const CONTACT_EMAIL = 'hello@ispdock.com';
 
+// Who stands behind ISPDock (legal pages, footer). Add the registered address here when it is confirmed.
+export const COMPANY = { legalName: 'Metasoft Limited', rc: 'RC 9918520' };
+// The date the current legal pages took effect. Change it whenever their wording changes.
+export const LEGAL_UPDATED = '1 November 2026';
+export const LEGAL_PAGES = [
+  ['/privacy', 'Privacy policy'],
+  ['/terms', 'Terms of service'],
+  ['/refunds', 'Refund policy'],
+  ['/cookies', 'Cookie policy'],
+] as const;
+
 // Plans: keep equal to the platform's pricing sheet (docs/pricing.md in isp-platform).
 export type Plan = { key: 'starter' | 'growth' | 'enterprise'; name: string; price: number; limit: number };
 export const PLANS: Plan[] = [
